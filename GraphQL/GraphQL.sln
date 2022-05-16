@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Domain", "GraphQL.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Infra", "GraphQL.Infra\GraphQL.Infra.csproj", "{C2640AA2-3CA0-478B-AE7F-3B31EAB1FFD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Application", "GraphQL.Application\GraphQL.Application.csproj", "{72F1E1CA-E40E-4E4D-BAC4-5A1C9331CAD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C2640AA2-3CA0-478B-AE7F-3B31EAB1FFD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2640AA2-3CA0-478B-AE7F-3B31EAB1FFD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2640AA2-3CA0-478B-AE7F-3B31EAB1FFD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F1E1CA-E40E-4E4D-BAC4-5A1C9331CAD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F1E1CA-E40E-4E4D-BAC4-5A1C9331CAD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F1E1CA-E40E-4E4D-BAC4-5A1C9331CAD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F1E1CA-E40E-4E4D-BAC4-5A1C9331CAD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
