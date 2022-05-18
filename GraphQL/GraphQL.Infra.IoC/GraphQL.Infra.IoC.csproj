@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GraphQL.Application\GraphQL.Application.csproj" />
     <ProjectReference Include="..\GraphQL.Infra\GraphQL.Infra.csproj" />
   </ItemGroup>
 

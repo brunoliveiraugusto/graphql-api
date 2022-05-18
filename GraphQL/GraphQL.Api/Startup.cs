@@ -21,7 +21,7 @@ namespace GraphQL.Api
         {
 
             services.AddControllers();
-            services.RegisterDependencyInjection(Configuration);
+            services.RegisterDependencyInjection();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQL.Api", Version = "v1" });
