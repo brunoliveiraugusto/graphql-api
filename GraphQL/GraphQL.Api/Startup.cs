@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using GraphQL.Infra.IoC.DependencyInjection;
 
 namespace GraphQL.Api
 {
@@ -20,6 +21,7 @@ namespace GraphQL.Api
         {
 
             services.AddControllers();
+            services.RegisterDependencyInjection(Configuration);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQL.Api", Version = "v1" });
