@@ -3,14 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GraphQL.Infra.IoC
+namespace GraphQL.Infra.IoC.DependencyInjection
 {
     public static class Injector
     {
         public static void RegisterDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<Database>();
-            services.AddDbContext<Database>(options => options.UseSqlServer(configuration.GetConnectionString("GraphQLDatabase")));
+            services.AddDbContext<GraphQLContext>(options => options.UseInMemoryDatabase("GraphQLDB"), ServiceLifetime.Singleton);
+
+            //services.AddTransient<ITargetService>
         }
     }
 }
