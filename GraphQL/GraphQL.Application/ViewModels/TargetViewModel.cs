@@ -6,9 +6,6 @@ namespace GraphQL.Application.ViewModels
     {
         public IList<int> Combination { get; set; }
 
-        public static TargetViewModel NewTarget(IList<int> combination)
-        {
-            return new() { Combination = combination };
-        }
+        public static TargetViewModel NewTarget(IList<int> combination) => new() { Combination = combination };
     }
 }

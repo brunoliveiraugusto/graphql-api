@@ -18,12 +18,12 @@ namespace GraphQL.Tests.ApplicationTest.Services
 {
     public class TargetServiceTest
     {
-        private Mock<ITargetRepository> _targetRepositoryMock = new BuilderTargetRepositoryTest().Build();
-        private IMapper _mapper = new BuilderMapperTest().Build();
-        private IList<TargetHistory> _targetHistory = new BuilderTargetHistoryTest().Historic();
-        private IList<TargetHistory> _noHistoric = new BuilderTargetHistoryTest().NoHistoric();
-        private CombinationViewModel _combination = new BuilderCombinationViewModelTest().Default().Build();
-        private CombinationViewModel _combinationImpossible = new BuilderCombinationViewModelTest().Impossible().Build();
+        private readonly Mock<ITargetRepository> _targetRepositoryMock = new BuilderTargetRepositoryTest().Build();
+        private readonly IMapper _mapper = new BuilderMapperTest().Build();
+        private readonly IList<TargetHistory> _targetHistory = new BuilderTargetHistoryTest().Historic();
+        private readonly IList<TargetHistory> _noHistoric = new BuilderTargetHistoryTest().NoHistoric();
+        private readonly CombinationViewModel _combination = new BuilderCombinationViewModelTest().Default().Build();
+        private readonly CombinationViewModel _combinationImpossible = new BuilderCombinationViewModelTest().Impossible().Build();
 
         private TargetService Build()
         {

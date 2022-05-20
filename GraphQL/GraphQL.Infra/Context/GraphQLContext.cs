@@ -1,8 +1,6 @@
 ﻿using GraphQL.Domain.Entities;
 using GraphQL.Infra.Mappings;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace GraphQL.Infra.Context
 {
