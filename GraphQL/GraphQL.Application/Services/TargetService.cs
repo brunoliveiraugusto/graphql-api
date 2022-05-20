@@ -1,4 +1,5 @@
-﻿using GraphQL.Application.Interfaces;
+﻿using AutoMapper;
+using GraphQL.Application.Interfaces;
 using GraphQL.Application.ViewModels;
 using GraphQL.Domain.Entities;
 using GraphQL.Infra.Interfaces;
@@ -13,23 +14,27 @@ namespace GraphQL.Application.Services
     public class TargetService : ITargetService
     {
         private readonly ITargetRepository _targetRepository;
+        private readonly IMapper _mapper;
 
-        public TargetService(ITargetRepository targetRepository)
+        public TargetService(ITargetRepository targetRepository, IMapper mapper)
         {
             _targetRepository = targetRepository;
+            _mapper = mapper;
         }
 
-        public async Task<TargetViewModel> ProcessCombinationAsync(IEnumerable<int> sequence, int target)
+        public async Task<IEnumerable<int>> ProcessCombinationAsync(CombinationViewModel combination)
         {
             try
             {
-                IList<int> result = GetCombination(sequence.OrderByDescending(s => s), target);
+                IList<int> result = GetCombination(combination.Sequence.OrderByDescending(s => s), combination.Target);
 
-                TargetHistory targetHistory = (JsonConvert.SerializeObject(sequence), JsonConvert.SerializeObject(result), target);
+                TargetHistory targetHistory = (JsonConvert.SerializeObject(combination.Sequence), 
+                    JsonConvert.SerializeObject(result), combination.Target);
 
                 await _targetRepository.CreateAsync(targetHistory);
 
-                return TargetViewModel.NewTargetViewModel(result, target);
+                return result.Sum(r => r) == combination.Target ? 
+                    result : new List<int>();
             }
             catch (Exception)
             {
@@ -50,6 +55,17 @@ namespace GraphQL.Application.Services
             }
 
             return result;
+        }
+
+        public IEnumerable<TargetHistoryViewModel> GetHistoryByDateRange(DateTime start, DateTime end)
+        {
+            var history = _targetRepository.GetHistoryByDateRange(start, end);
+            return Mapper<IEnumerable<TargetHistoryViewModel>, IEnumerable<TargetHistory>>(history);
+        }
+
+        private M Mapper<M, E>(E entity)
+        {
+            return _mapper.Map<M>(entity);
         }
     }
 }
