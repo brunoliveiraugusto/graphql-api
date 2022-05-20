@@ -1,4 +1,6 @@
-﻿using GraphQL.Application.Interfaces;
+﻿using AutoMapper;
+using GraphQL.Application.AutoMapper;
+using GraphQL.Application.Interfaces;
 using GraphQL.Application.Services;
 using GraphQL.Infra.Context;
 using GraphQL.Infra.Interfaces;
@@ -17,6 +19,17 @@ namespace GraphQL.Infra.IoC.DependencyInjection
             services.AddTransient<ITargetService, TargetService>();
 
             services.AddTransient<ITargetRepository, TargetRepository>();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new EntitieToViewModel());
+                mc.AllowNullCollections = true;
+                mc.AllowNullDestinationValues = true;
+                mc.ValidateInlineMaps = false;
+            });
+
+            var mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }
