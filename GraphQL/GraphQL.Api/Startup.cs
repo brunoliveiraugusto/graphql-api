@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using GraphQL.Infra.IoC.DependencyInjection;
+using System.IO;
+using System.Reflection;
+using System;
 
 namespace GraphQL.Api
 {
@@ -22,9 +25,13 @@ namespace GraphQL.Api
 
             services.AddControllers();
             services.RegisterDependencyInjection();
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQL.Api", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
