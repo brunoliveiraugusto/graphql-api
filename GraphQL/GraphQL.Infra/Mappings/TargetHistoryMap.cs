@@ -12,6 +12,7 @@ namespace GraphQL.Infra.Mappings
             builder.Property(p => p.Sequence).IsRequired();
             builder.Property(p => p.Target).IsRequired();
             builder.Property(p => p.Date).IsRequired();
+            builder.Property(p => p.Result).IsRequired();
         }
     }
 }

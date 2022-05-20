@@ -41,12 +41,12 @@ namespace GraphQL.Tests.ApplicationTest.Services
             #endregion
 
             #region When
-            //var combination = await targetService.ProcessCombinationAsync(_combination);
+            var combination = await targetService.ProcessCombinationAsync(_combination.Sequence, _combination.Target);
             #endregion
 
             #region Then
-            //combination.Sum(c => c).Should().Equals(_combination.Sequence.Sum(c => c));
-            //combination.Sum(c => c).Should().Equals(_combination.Target);
+            combination.Combination.Sum(c => c).Should().Equals(_combination.Sequence.Sum(c => c));
+            combination.Combination.Sum(c => c).Should().Equals(_combination.Target);
             #endregion
         }
 
@@ -61,12 +61,12 @@ namespace GraphQL.Tests.ApplicationTest.Services
             #endregion
 
             #region When
-            //var combination = await targetService.ProcessCombinationAsync(_combinationImpossible);
+            var combination = await targetService.ProcessCombinationAsync(_combinationImpossible.Sequence, _combinationImpossible.Target);
             #endregion
 
             #region Then
-            //combination.Count().Should().Equals(0);
-            //combination.Should().BeEmpty();
+            combination.Combination.Count().Should().Equals(0);
+            combination.Combination.Should().BeEmpty();
             #endregion
         }
 
