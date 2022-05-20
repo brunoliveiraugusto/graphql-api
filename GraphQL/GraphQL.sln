@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Infra", "GraphQL.In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Application", "GraphQL.Application\GraphQL.Application.csproj", "{72F1E1CA-E40E-4E4D-BAC4-5A1C9331CAD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Infra.IoC", "GraphQL.Infra.IoC\GraphQL.Infra.IoC.csproj", "{C4AE8CE7-9749-479B-86A0-F019BB76C67E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Infra.IoC", "GraphQL.Infra.IoC\GraphQL.Infra.IoC.csproj", "{C4AE8CE7-9749-479B-86A0-F019BB76C67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Tests", "GraphQL.Tests\GraphQL.Tests.csproj", "{EB882BCF-DDD0-49EC-A292-64287427993E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C4AE8CE7-9749-479B-86A0-F019BB76C67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4AE8CE7-9749-479B-86A0-F019BB76C67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4AE8CE7-9749-479B-86A0-F019BB76C67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB882BCF-DDD0-49EC-A292-64287427993E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB882BCF-DDD0-49EC-A292-64287427993E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB882BCF-DDD0-49EC-A292-64287427993E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB882BCF-DDD0-49EC-A292-64287427993E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
