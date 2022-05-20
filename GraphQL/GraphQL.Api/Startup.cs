@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using GraphQL.Infra.IoC.DependencyInjection;
-using System.IO;
-using System.Reflection;
-using System;
+using GraphQL.Api.GraphQL.GraphQLSchema;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
+using GraphQL.Api.GraphQL.GraphQLType;
 
 namespace GraphQL.Api
 {
@@ -22,17 +22,10 @@ namespace GraphQL.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.RegisterDependencyInjection();
-            services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQL.Api", Version = "v1" });
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
+            services.AddScoped<AppSchema>();
+            services.AddGraphQL().AddSystemTextJson().AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,13 +33,14 @@ namespace GraphQL.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GraphQL.Api v1"));
             }
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseGraphQL<AppSchema>();
+            app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
 
             app.UseEndpoints(endpoints =>
             {

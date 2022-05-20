@@ -22,19 +22,21 @@ namespace GraphQL.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<int>> ProcessCombinationAsync(CombinationViewModel combination)
+        public async Task<TargetViewModel> ProcessCombinationAsync(IEnumerable<int> sequence, int target)
         {
             try
             {
-                IList<int> result = GetCombination(combination.Sequence.OrderByDescending(s => s), combination.Target);
+                IList<int> result = GetCombination(sequence.OrderByDescending(s => s), target);
 
-                TargetHistory targetHistory = (JsonConvert.SerializeObject(combination.Sequence), 
-                    JsonConvert.SerializeObject(result), combination.Target);
+                TargetHistory targetHistory = (JsonConvert.SerializeObject(sequence), 
+                    JsonConvert.SerializeObject(result), target);
 
                 await _targetRepository.CreateAsync(targetHistory);
 
-                return result.Sum(r => r) == combination.Target ? 
+                var combination = result.Sum(r => r) == target ? 
                     result : new List<int>();
+
+                return TargetViewModel.NewTarget(combination);
             }
             catch (Exception)
             {

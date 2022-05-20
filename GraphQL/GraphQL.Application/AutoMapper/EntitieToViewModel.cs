@@ -8,7 +8,8 @@ namespace GraphQL.Application.AutoMapper
     {
         public EntitieToViewModel()
         {
-            CreateMap<TargetHistory, TargetHistoryViewModel>();
+            CreateMap<TargetHistory, TargetHistoryViewModel>()
+                .ForMember(dest => dest.Date, sc => sc.MapFrom(x => x.Date.ToString()));
         }
     }
 }

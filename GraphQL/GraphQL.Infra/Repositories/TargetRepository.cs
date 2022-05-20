@@ -13,7 +13,7 @@ namespace GraphQL.Infra.Repositories
 
         public IEnumerable<TargetHistory> GetHistoryByDateRange(DateTime start, DateTime end)
         {
-            return DbSet.Where(targetHistory => targetHistory.Date >= start && targetHistory.Date <= end);
+            return DbSet.Where(targetHistory => targetHistory.Date.Date >= start && targetHistory.Date.Date <= end);
         }
     }
 }

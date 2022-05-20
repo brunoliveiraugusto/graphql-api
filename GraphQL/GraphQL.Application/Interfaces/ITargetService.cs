@@ -7,7 +7,7 @@ namespace GraphQL.Application.Interfaces
 {
     public interface ITargetService
     {
-        Task<IEnumerable<int>> ProcessCombinationAsync(CombinationViewModel combination);
+        Task<TargetViewModel> ProcessCombinationAsync(IEnumerable<int> Sequence, int target);
         IEnumerable<TargetHistoryViewModel> GetHistoryByDateRange(DateTime start, DateTime end);
     }
 }
