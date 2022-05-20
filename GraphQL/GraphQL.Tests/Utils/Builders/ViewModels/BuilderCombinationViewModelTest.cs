@@ -20,5 +20,16 @@ namespace GraphQL.Tests.Utils.Builders.ViewModels
 
             return this;
         }
+
+        public BuilderCombinationViewModelTest Impossible()
+        {
+            Model = new CombinationViewModel
+            {
+                Sequence = new List<int> { 7, 13, 22, 40, 59 },
+                Target = 9
+            };
+
+            return this;
+        }
     }
 }

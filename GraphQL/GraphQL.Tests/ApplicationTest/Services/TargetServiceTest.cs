@@ -21,7 +21,9 @@ namespace GraphQL.Tests.ApplicationTest.Services
         private Mock<ITargetRepository> _targetRepositoryMock = new BuilderTargetRepositoryTest().Build();
         private IMapper _mapper = new BuilderMapperTest().Build();
         private IList<TargetHistory> _targetHistory = new BuilderTargetHistoryTest().Historic();
-        private CombinationViewModel _combinationVM = new BuilderCombinationViewModelTest().Default().Build();
+        private IList<TargetHistory> _noHistoric = new BuilderTargetHistoryTest().NoHistoric();
+        private CombinationViewModel _combination = new BuilderCombinationViewModelTest().Default().Build();
+        private CombinationViewModel _combinationImpossible = new BuilderCombinationViewModelTest().Impossible().Build();
 
         private TargetService Build()
         {
@@ -39,12 +41,32 @@ namespace GraphQL.Tests.ApplicationTest.Services
             #endregion
 
             #region When
-            var combination = await targetService.ProcessCombinationAsync(_combinationVM);
+            var combination = await targetService.ProcessCombinationAsync(_combination);
             #endregion
 
             #region Then
-            combination.Sum(c => c).Should().Equals(_combinationVM.Sequence.Sum(c => c));
-            combination.Sum(c => c).Should().Equals(_combinationVM.Target);
+            combination.Sum(c => c).Should().Equals(_combination.Sequence.Sum(c => c));
+            combination.Sum(c => c).Should().Equals(_combination.Target);
+            #endregion
+        }
+
+        [Fact(DisplayName = "Teste de processamento de combinação dado uma sequência e um alvo onde não se é possível fazer uma combinação para atingir o alvo")]
+        public async void DadoUmaSequenciaEUmAlvoQueroProcessarUmaCombinacaoImpossivelDeSerRealizada()
+        {
+            #region Given
+            TargetService targetService = Build();
+
+            _targetRepositoryMock
+                .Setup(s => s.CreateAsync(It.IsAny<TargetHistory>()));
+            #endregion
+
+            #region When
+            var combination = await targetService.ProcessCombinationAsync(_combinationImpossible);
+            #endregion
+
+            #region Then
+            combination.Count().Should().Equals(0);
+            combination.Should().BeEmpty();
             #endregion
         }
 
@@ -69,6 +91,30 @@ namespace GraphQL.Tests.ApplicationTest.Services
             #region Then
             combination.Should().NotBeEmpty();
             combination.Should().HaveCount(_targetHistory.Count());
+            #endregion
+        }
+
+        [Fact(DisplayName = "Teste de obtenção de histórico de processamento de combinações onde não há existência de dados para o range informado")]
+        public void ObtencaoDeHistoricoDeProcessamentoDeCombinacoesComAusenciaDeDadosNoRangeInformado()
+        {
+            #region Given
+            TargetService targetService = Build();
+
+            _targetRepositoryMock
+                .Setup(s => s.GetHistoryByDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns(_noHistoric);
+
+            DateTime start = DateTime.Now.AddYears(5);
+            DateTime end = start.AddYears(2);
+            #endregion
+
+            #region When
+            var combination = targetService.GetHistoryByDateRange(start, end);
+            #endregion
+
+            #region Then
+            combination.Should().BeEmpty();
+            combination.Count().Should().Equals(0);
             #endregion
         }
     }

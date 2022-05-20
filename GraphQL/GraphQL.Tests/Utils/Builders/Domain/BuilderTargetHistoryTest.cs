@@ -44,5 +44,12 @@ namespace GraphQL.Tests.Utils.Builders.Domain
 
             return Model;
         }
+
+        public List<TargetHistory> NoHistoric()
+        {
+            Model = new List<TargetHistory>();
+
+            return Model;
+        }
     }
 }
