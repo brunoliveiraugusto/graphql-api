@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,11 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GraphQL.Infra.IoC\GraphQL.Infra.IoC.csproj" />
+    <ProjectReference Include="..\GraphQL.Infra.IoC\GraphQL.Infra.IoC.csproj" /> 
   </ItemGroup>
 
 </Project>
