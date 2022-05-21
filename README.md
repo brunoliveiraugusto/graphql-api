@@ -2,11 +2,11 @@
 Projeto com finalidade de definir a combinação de números necessária para atingir o alvo definido com base em uma sequência de números.
 
 ### Sobre o projeto:
-O Projeto foi desenvolvido utilizando .Net 5.0, bibliotecas auxiliares como GraphQL para requisições HTTP, banco de dados em memória para armazenamento do histórico de chamadas, XUnit para contrução de testes de unidade e algumas bibliotecas auxiliares e padrões de projeto para facilitar o desenvolvimento.
+O Projeto foi desenvolvido utilizando .Net 5.0, bibliotecas auxiliares como GraphQL para consumo das apis, banco de dados em memória para armazenamento do histórico de chamadas, XUnit para contrução de testes de unidade e algumas bibliotecas auxiliares e padrões de projeto para facilitar o desenvolvimento.
 
 ### Execução: 
 
-Para a execução do projeto basta acessar a url https://teste.com.br e seguir os passos abaixo para realizar o consumo das APIS:
+Para a execução do projeto basta realizar o clone e seguir os passos abaixo para realizar o consumo das APIS:
 
 1º - Para gerar uma combinação, utilize como base a query abaixo:
 
@@ -32,4 +32,4 @@ query {
 }
 ```
 
-ATENÇÃO: Como mencionado acima, o banco de dados utilizado para aplicação é em memória, portanto, ao abandonar a sessão e realizar um novo acesso, as informações gravadas anteriormente serão perdidas. A opção por utilizar um banco de dados em memória foi para fins de exemplificação e também para facilitar o deploy da aplicação em um ambiente de núvem gratuíto sem existir a necessidade de disponibilidade de um banco de dados real.
+ATENÇÃO: Como mencionado acima, o banco de dados utilizado para aplicação é em memória, portanto, ao interromper a execução e posteriormente executá-lo novamente, as informações gravadas serão perdidas. A opção por utilizar um banco de dados em memória foi para fins de exemplificação.
